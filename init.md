@@ -65,6 +65,6 @@
        .................待补充，在pblk-GC.c_md
    
 9.     blk_queue_write_cache(tqueue, true, false);
-10.     wake_up_process(pblk->writer_ts);  //唤醒写线程
+10.     wake_up_process(pblk->writer_ts);   //唤醒写线程
 	   
 11.     return pblk;
