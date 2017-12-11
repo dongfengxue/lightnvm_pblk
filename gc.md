@@ -1,4 +1,18 @@
 # pblk-gc.c 代码流程结构简析：
+
+## pblk_gc_init 
+1. gc->gc_ts = kthread_create(pblk_gc_ts, pblk, "pblk-gc-ts");   //创建内核gc线程
+2. gc->gc_writer_ts = kthread_create(pblk_gc_writer_ts, pblk, "pblk-gc-writer-ts"); //创建内核gc写线程
+3. gc->gc_read_ts = kthread_create()  //创建内核gc读线程
+4. //设置内核定时器
+    setup_timer(&gc->gc_timer, pblk_gc_timer, (unsigned long)pblk);
+    mod_timer(&gc-
+5   //gc线程:   检查line的状态（是否写满、是否有脏数据等等），把需要GC的line放到pblk_gc结构体的r_list中
+      //gc读线程: 根据pblk_gc结构体中的r_list对line进行读取，把读到的有效数据存入w_list
+      // gc写线程: 将w_list的内容写入cache（调用gc用来写cache的函数）也就是写入ring buffer
+      
+      
+
 * GC搬移时统计相应可用sec的计数，sec的ref越大说明无效的越多，优先选择进行gc
 
 ## pblk_gc_run(struct pblk *pblk)
