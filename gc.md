@@ -1,6 +1,6 @@
 # pblk-gc.c 代码流程结构简析：
-GC搬移时统计相应可用sec的计数，sec的ref越大说明
-代码流程如下，从1依次往下调用
+* GC搬移时统计相应可用sec的计数，sec的ref越大说明无效的越多，优先选择进行gc
+## 代码流程如下，从1依次往下调用
 
 1.      pblk_gc_line（）函数调用line_ws = mempool_alloc(pblk->line_ws_pool, GFP_KERNEL);
         创建内存池，存放line_ws(work struct)
