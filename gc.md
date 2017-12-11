@@ -7,9 +7,9 @@
 4. //设置内核定时器
     setup_timer(&gc->gc_timer, pblk_gc_timer, (unsigned long)pblk);
     mod_timer(&gc-
-5   //gc线程:   检查line的状态（是否写满、是否有脏数据等等），把需要GC的line放到pblk_gc结构体的r_list中
-      //gc读线程: 根据pblk_gc结构体中的r_list对line进行读取，把读到的有效数据存入w_list
-      // gc写线程: 将w_list的内容写入cache（调用gc用来写cache的函数）也就是写入ring buffer
+5.  //gc线程:   检查line的状态（是否写满、是否有脏数据等等），把需要GC的line放到pblk_gc结构体的r_list中
+    //gc读线程: 根据pblk_gc结构体中的r_list对line进行读取，把读到的有效数据存入w_list
+    // gc写线程: 将w_list的内容写入cache（调用gc用来写cache的函数）也就是写入ring buffer
       
       
 
