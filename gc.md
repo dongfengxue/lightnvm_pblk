@@ -21,7 +21,7 @@ GC搬移时统计相应可用sec的计数，sec的ref越大说明
          
 ## pblk_GC_write()
 * 暂时没找到哪里调用，不过这个函数很是很重要的，下面讲解一下流程
-        GC要write的内容放在list双向链表里，首先调用list_cut_position(&w_list, &gc->w_list, gc->w_list.prev);   //list划分
-        来得到要写的list，对于每一条要写的list，pblk_write_gc_to_cache(）都将这条GC写放到cache中，统一写下去
+        GC要write的内容放在list双向链表里，首先调用list_cut_position(&w_list, &gc->w_list, gc->w_list.prev);   
+        //list划分来得到要写的list，对于每一条要写的list，pblk_write_gc_to_cache(）都将这条GC写放到cache中，统一写下去
         list_del(&gc_rq->list);//删除请求的list
-        kref_put(&gc_rq->line->ref, pblk_line_put); ///* Write buffer L2P references -- */
+        kref_put(&gc_rq->line->ref, pblk_line_put); /* Write buffer L2P references -- */
