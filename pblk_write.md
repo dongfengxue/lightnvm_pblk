@@ -22,7 +22,7 @@
         }
                 
         2.1
-            pblk_update_map_cache(){
+            pblk_update_map_cache(struct pblk *pblk, sector_t lba, struct ppa_addr ppa){
             pblk_update_map(struct pblk *pblk, sector_t lba, struct ppa_addr ppa);   //更新map
             }
         2.2
