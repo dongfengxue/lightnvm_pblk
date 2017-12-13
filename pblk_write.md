@@ -79,12 +79,11 @@
                  pblk_rb_write_entry_gc(&pblk->rwb, data, w_ctx, gc_line, pos);    //pblk-rb.c GC 写入到ring buffer
                  pblk_write_should_kick(pblk);  //唤醒pblk写线程（读cache，写入设备）
         }
-2.      pblk_rb_write_entry_gc(&pblk->rwb, data, w_ctx, gc_line, pos){
-           __pblk_rb_write_entry(rb, data, w_ctx, entry);       //memcpy 写入到ring buffer缓存
-           pblk_update_map_gc(pblk, w_ctx.lba, entry->cacheline, gc_line); //更新GC map
-      
+2.       pblk_rb_write_entry_gc(&pblk->rwb, data, w_ctx, gc_line, pos){
+        _pblk_rb_write_entry(rb, data, w_ctx, entry);       //memcpy 写入到ring buffer缓存
+        pblk_update_map_gc(pblk, w_ctx.lba, entry->cacheline, gc_line); //更新GC map
       }
-        2.1      pblk_update_map_gc(struct pblk *pblk, sector_t lba, struct ppa_addr ppa,struct pblk_line *gc_line){
+     2.1         pblk_update_map_gc(struct pblk *pblk, sector_t lba, struct ppa_addr ppa,struct pblk_line *gc_line){
                         l2p_ppa = pblk_trans_map_get(pblk, lba);   //得到逻辑地址对应的物理地址
                         /*如果失效，重置新的*/
                         pblk_trans_map_set(pblk, lba, ppa);
